@@ -1,9 +1,34 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
+import { JsonLd } from '@/components/shared/json-ld'
+
+export const metadata: Metadata = {
+  title: 'Free EU E-Invoice Generator - XRechnung, ZUGFeRD, Factur-X',
+  description:
+    'Generate compliant EU e-invoices for free. Supports XRechnung (Germany), ZUGFeRD, and Factur-X (France). No signup required — fill the form and download.',
+  alternates: {
+    canonical: '/',
+    languages: { de: '/de', fr: '/fr' },
+  },
+}
 
 export default function Home() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-16">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'EU Invoice Generator',
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+          description: 'Free EU e-invoice generator supporting XRechnung, ZUGFeRD, and Factur-X formats.',
+          url: 'https://eu-invoice-web.vercel.app',
+          inLanguage: ['en', 'de', 'fr'],
+        }}
+      />
       <section className="text-center space-y-6 mb-16">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           EU-Compliant E-Invoices

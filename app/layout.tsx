@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const geistSans = Geist({
@@ -12,10 +13,40 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const siteUrl = 'https://eu-invoice-web.vercel.app'
+
 export const metadata: Metadata = {
-  title: 'EU Invoice Generator - XRechnung & Factur-X',
+  metadataBase: new URL(siteUrl),
+  title: {
+    template: '%s | EU Invoice Generator',
+    default: 'EU Invoice Generator - Free XRechnung, ZUGFeRD & Factur-X',
+  },
   description:
-    'Generate EU-compliant e-invoices for Germany (XRechnung, ZUGFeRD) and France (Factur-X). Free, open-source, no signup required.',
+    'Generate EU-compliant e-invoices for free. XRechnung & ZUGFeRD for Germany, Factur-X for France. No signup, no subscription. EN 16931 compliant.',
+  keywords: [
+    'e-invoice', 'XRechnung', 'ZUGFeRD', 'Factur-X', 'EU invoice', 'e-Rechnung',
+    'xrechnung erstellen kostenlos', 'zugferd rechnung erstellen',
+    'facture electronique gratuit', 'factur-x gratuit',
+    'EN 16931', 'electronic invoice generator', 'free invoice tool',
+  ],
+  openGraph: {
+    type: 'website',
+    siteName: 'EU Invoice Generator',
+    locale: 'en_US',
+    alternateLocale: ['de_DE', 'fr_FR'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  alternates: {
+    canonical: '/',
+    languages: { en: '/', de: '/de', fr: '/fr' },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 }
 
 export default function RootLayout({
@@ -38,6 +69,9 @@ export default function RootLayout({
               <a href="/invoice/new" className="hover:text-foreground transition-colors">
                 Create Invoice
               </a>
+              <span className="text-border">|</span>
+              <a href="/de" className="hover:text-foreground transition-colors">DE</a>
+              <a href="/fr" className="hover:text-foreground transition-colors">FR</a>
             </nav>
           </div>
         </header>
@@ -65,6 +99,7 @@ export default function RootLayout({
             local tax authority before submitting invoices.
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   )

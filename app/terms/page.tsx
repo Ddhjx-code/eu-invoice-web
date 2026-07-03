@@ -1,3 +1,12 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Terms of Use & Disclaimer',
+  description:
+    'Terms of use and legal disclaimer for the EU Invoice Generator tool.',
+  robots: { index: true, follow: false },
+}
+
 export default function TermsPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-16 prose prose-sm dark:prose-invert">
